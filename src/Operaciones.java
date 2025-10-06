@@ -75,11 +75,16 @@ public class Operaciones {
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
             //leemos el cliente
-            Cliente cliente = (Cliente) ois.readObject();
+            Cliente cliente = null;
 
-            System.out.println("Ya tienes el cliente");
-            System.out.println(cliente.getNombre());
-            System.out.println(cliente.getEmail());
+            while ((cliente = (Cliente) ois.readObject())!=null) {
+                System.out.println(cliente.getNombre());
+                System.out.println(cliente.getEmail());
+            }
+
+            //System.out.println("Ya tienes el cliente");
+            //System.out.println(cliente.getNombre());
+            //System.out.println(cliente.getEmail());
 
         } catch (FileNotFoundException e) {
             System.out.printf("\nError el archivo %s no se encuentra", path);
@@ -105,9 +110,17 @@ public class Operaciones {
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
             //Leemos el pedido
-            Pedido pedido = (Pedido) ois.readObject();
-            System.out.println(pedido.getProducto());
-            System.out.println(pedido.getCantidad());
+          //  Pedido pedido = (Pedido) ois.readObject();
+          //  System.out.println(pedido.getProducto());
+          //  System.out.println(pedido.getCantidad());
+
+            Pedido pedido = null;
+
+            while ((pedido = (Pedido) ois.readObject())!=null) {
+                System.out.println(pedido.getProducto());
+                System.out.println(pedido.getCantidad());
+            }
+
         } catch (FileNotFoundException e) {
             System.out.printf("\nError el archivo %s no se encuentra", path);
         } catch (IOException e) {
@@ -149,13 +162,13 @@ public class Operaciones {
         }
     }
 
-    public void escribirPedidoCSV(String path){
+    public void escribirPedidoCSV(String path) {
         ArrayList<Pedido> listaPedidos = new ArrayList<>();
-        listaPedidos.add(new Pedido(1, 1, "Samsung Galaxy s25",1));
-        listaPedidos.add(new Pedido(2, 2, "Saco comida para gatos",2));
-        listaPedidos.add(new Pedido(3, 3, "Camiseta negra",10));
-        listaPedidos.add(new Pedido(4, 2, "Arenero grande",2));
-        listaPedidos.add(new Pedido(5, 1, "Carcasa chula",1));
+        listaPedidos.add(new Pedido(1, 1, "Samsung Galaxy s25", 1));
+        listaPedidos.add(new Pedido(2, 2, "Saco comida para gatos", 2));
+        listaPedidos.add(new Pedido(3, 3, "Camiseta negra", 10));
+        listaPedidos.add(new Pedido(4, 2, "Arenero grande", 2));
+        listaPedidos.add(new Pedido(5, 1, "Carcasa chula", 1));
 
         File file = new File(path);
         PrintWriter printWriter = null;
